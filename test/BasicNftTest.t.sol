@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.18;
 
-import {Test} from "forge-std/Test.sol";
+import {Test, console} from "forge-std/Test.sol";
 import {DeployBasicNft} from "../script/DeployBasicNft.s.sol";
 import {BasicNft} from "../src/BasicNft.sol";
 
@@ -35,6 +35,7 @@ contract BasicNftTest is Test {
     function testTokenURIIsCorrect() public {
         vm.prank(USER);
         basicNft.mintNft(PUG);
+        console.logString(basicNft.tokenURI(0));
         assert(
             keccak256(abi.encodePacked(basicNft.tokenURI(0))) ==
                 keccak256(abi.encodePacked(PUG))
